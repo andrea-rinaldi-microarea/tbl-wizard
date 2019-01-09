@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 
 @Component({
@@ -6,18 +6,32 @@ import { ElectronService } from 'ngx-electron';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ng-tbl-wizard';
   result: string ='';
+  version: string;
   
   constructor(
     private electron: ElectronService,
     private chd: ChangeDetectorRef
   ) {
-    this.electron.ipcRenderer.on('action-succeeded', (event, arg) => {
+    this.electron.ipcRenderer
+    .on('action-succeeded', (event, arg) => {
       this.result = this.result + '\n' + arg;
       this.chd.detectChanges();
     })
+    .on('error', (event, arg) => {
+      this.result = 'error: ' + arg;
+      this.chd.detectChanges();
+    })
+    .on('main-version', (event, arg) => {
+      this.version = "electron: " + arg.electron + " node: " + arg.node;
+      this.chd.detectChanges();
+    })
+  }
+
+  ngOnInit() {
+    this.electron.ipcRenderer.send('version', true);
   }
 
   onAction() {
