@@ -7,12 +7,14 @@ var WizardAdapter = require('../src/wizard-adapter');
 
 let mainWindow: Electron.BrowserWindow;
 var env: any;
+var templatesPath: string;
 
 function setEventHandlers() {
     ipcMain
     .on('action', (event, argument) => {
         try {
-            env.run('sb:app', { 'force': true }, (err) => {
+            env.adapter.answers = argument.answers;
+            env.run('sb:app', { 'force': true, 'sourceRoot': templatesPath, 'destinationRoot': argument.workingDir}, (err) => {
                 if (err) {
                     console.log(err.message);
                     event.sender.send('error', err.message);
@@ -51,6 +53,8 @@ function createWindow() {
 app.on("ready", () => {
     env = yeoman.createEnv([],{}, new WizardAdapter());
     env.registerStub(starboltApp, 'sb:app');
+
+    templatesPath = path.dirname(require.resolve('generator-starbolt/generators/app')) + "\\templates";
 
     createWindow();
     setEventHandlers();

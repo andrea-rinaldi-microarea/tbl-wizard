@@ -1,7 +1,12 @@
-var WizardAdapter = module.exports = function WizardAdapter() {};
 
-WizardAdapter.prototype.prompt = function (questions, callback) {
-    this.answerCallback = callback;
+var WizardAdapter = module.exports = function WizardAdapter() {
+    var answers = {};
+}
+
+WizardAdapter.prototype.prompt = function (questions) {
+    return new Promise(function (fulfill, reject) {
+        fulfill(this.answers);
+    }.bind(this));
 };
 
 WizardAdapter.prototype.diff = function (actual, expected) {

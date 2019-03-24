@@ -35,6 +35,12 @@ export class AppComponent implements OnInit {
   }
 
   onAction() {
-    this.electron.ipcRenderer.send('action', true);
+    this.electron.ipcRenderer.send('action', { 
+      workingDir: "C:\\Users\\rinaldi\\Documents\\working\\standard\\applications",
+      answers:  {
+        appName: "myNewApp",
+        defaultLibrary: "firstLibrary"
+      }
+    });
   } 
 }
