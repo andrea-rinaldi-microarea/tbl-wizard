@@ -1,6 +1,7 @@
 
 var WizardAdapter = module.exports = function WizardAdapter() {
     var answers = {};
+    var mainWindow = null;
 }
 
 WizardAdapter.prototype.prompt = function (questions) {
@@ -13,5 +14,4 @@ WizardAdapter.prototype.diff = function (actual, expected) {
 
 };
 
-// TODO: Implement logger
-WizardAdapter.prototype.log = require('yeoman-environment/lib/util/log')();
+WizardAdapter.prototype.log = require('../src/wizard-logger')();

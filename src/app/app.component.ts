@@ -9,6 +9,7 @@ import { ElectronService } from 'ngx-electron';
 export class AppComponent implements OnInit {
   title = 'ng-tbl-wizard';
   result: string ='';
+  log: string[] = [];
   version: string;
   
   constructor(
@@ -26,6 +27,10 @@ export class AppComponent implements OnInit {
     })
     .on('main-version', (event, arg) => {
       this.version = "electron: " + arg.electron + " node: " + arg.node;
+      this.chd.detectChanges();
+    })
+    .on('log', (event, arg) => {
+      this.log.push(arg.status + ' ' + arg.arguments[0]);
       this.chd.detectChanges();
     })
   }
