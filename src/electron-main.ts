@@ -5,7 +5,6 @@ import * as yeoman from "yeoman-environment";
 import * as starboltApp from "generator-starbolt/generators/app";
 var WizardAdapter = require('../src/wizard-adapter');
 
-var mainWindow: Electron.BrowserWindow;
 var env: any;
 var templatesPath: string;
 
@@ -58,8 +57,8 @@ app.on("ready", () => {
 
     templatesPath = path.dirname(require.resolve('generator-starbolt/generators/app')) + "\\templates";
 
-    mainWindow = createWindow();
+    var mainWindow = createWindow();
     setEventHandlers();
-    env.adapter.log.mainWindow = mainWindow;
+    env.adapter.setMainWindow(mainWindow);
 
 });
