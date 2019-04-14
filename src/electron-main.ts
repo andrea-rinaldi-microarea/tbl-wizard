@@ -5,13 +5,16 @@ import * as yeoman from "yeoman-environment";
 import * as starboltApp from "generator-starbolt/generators/app";
 var WizardAdapter = require('../src/wizard-adapter');
 
-var env: any;
 var templatesPath: string;
+var mainWindow: Electron.BrowserWindow;
 
 function setEventHandlers() {
     ipcMain
     .on('action', (event, argument) => {
         try {
+            var env = yeoman.createEnv([],{}, new WizardAdapter());
+            env.registerStub(starboltApp, 'sb:app');
+            env.adapter.setMainWindow(mainWindow);
             env.adapter.answers = argument.answers;
             env.run('sb:app', { 'force': true, 'sourceRoot': templatesPath, 'destinationRoot': argument.workingDir}, (err) => {
                 if (err) {
@@ -52,13 +55,7 @@ function createWindow() {
 }
 
 app.on("ready", () => {
-    env = yeoman.createEnv([],{}, new WizardAdapter());
-    env.registerStub(starboltApp, 'sb:app');
-
     templatesPath = path.dirname(require.resolve('generator-starbolt/generators/app')) + "\\templates";
-
-    var mainWindow = createWindow();
+    mainWindow = createWindow();
     setEventHandlers();
-    env.adapter.setMainWindow(mainWindow);
-
 });
