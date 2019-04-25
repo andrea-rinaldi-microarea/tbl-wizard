@@ -17,35 +17,48 @@ module.exports = function logger() {
         identical: 'cyan',
         info: 'gray'
     };
+
+    log._pad = 0;
   
     _.extend(log, events.EventEmitter.prototype);
 
+    log._send = function(status, args) {
+      if (this.mainWindow)
+        this.mainWindow.webContents.send('log', {status: status, pad: this._pad, arguments: args})
+    }
+
     log.write = function () {
+        this._send('info', arguments);
         return this;
     }
 
     log.writeln = function () {
-        return this;
+      this._send('info', arguments);
+      return this;
     }
 
     log.ok = function () {
-        return this;
+      this._send('success', arguments);
+      return this;
     }
 
     log.error = function () {
-        return this;
+      this._send('error', arguments);
+      return this;
     }
 
     log.on('up', function () {
+      this._pad++;
     });
 
     log.on('down', function () {
+      this._pad--;
+      if (this._pad < 0) this._pad = 0; 
     });
 
   Object.keys(colors).forEach(function (status) {
     log[status] = function () {
-        if (this.mainWindow)
-            this.mainWindow.webContents.send('log', {status: status, arguments: arguments})
+        this._send(status, arguments);
         return this;
     };
   });

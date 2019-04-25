@@ -10,7 +10,7 @@ var mainWindow: Electron.BrowserWindow;
 
 function setEventHandlers() {
     ipcMain
-    .on('action', (event, argument) => {
+    .on('run', (event, argument) => {
         try {
             var env = yeoman.createEnv([],{}, new WizardAdapter());
             env.registerStub(starboltApp, 'sb:app');
@@ -18,15 +18,14 @@ function setEventHandlers() {
             env.adapter.answers = argument.answers;
             env.run('sb:app', { 'force': true, 'sourceRoot': templatesPath, 'destinationRoot': argument.workingDir}, (err) => {
                 if (err) {
-                    console.log(err.message);
-                    event.sender.send('error', err.message);
+                    env.adapter.log.error(err.message);
                 } else {
-                    event.sender.send('action-succeeded', 'completed');
+                    env.adapter.log.ok('completed');
                 }
             });
         } catch(err) {
             console.log(err);
-            event.sender.send('error', err.message);
+            env.adapter.log.error(err.message);
         }
     })
     .on('version', (event, argument) => {

@@ -17,20 +17,12 @@ export class AppComponent implements OnInit {
     private chd: ChangeDetectorRef
   ) {
     this.electron.ipcRenderer
-    .on('action-succeeded', (event, arg) => {
-      this.result = this.result + '\n' + arg;
-      this.chd.detectChanges();
-    })
-    .on('error', (event, arg) => {
-      this.result = 'error: ' + arg;
-      this.chd.detectChanges();
-    })
     .on('main-version', (event, arg) => {
       this.version = "electron: " + arg.electron + " node: " + arg.node;
       this.chd.detectChanges();
     })
     .on('log', (event, arg) => {
-      this.log.push(arg.status + ' ' + arg.arguments[0]);
+      this.log.push('[' + arg.status + '] ' + arg.arguments[0]);
       this.chd.detectChanges();
     })
   }
@@ -39,8 +31,8 @@ export class AppComponent implements OnInit {
     this.electron.ipcRenderer.send('version', true);
   }
 
-  onAction() {
-    this.electron.ipcRenderer.send('action', { 
+  onRun() {
+    this.electron.ipcRenderer.send('run', { 
       workingDir: "C:\\Users\\rinaldi\\Documents\\working\\standard\\applications",
       answers:  {
         appName: "myNewApp",
