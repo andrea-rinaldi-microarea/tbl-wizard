@@ -17,7 +17,7 @@ function setEventHandlers() {
             env.adapter.setMainWindow(mainWindow);
             env.adapter.answers = argument.answers;
             env.run('sb:app', { 'force': true, 'sourceRoot': templatesPath, 'destinationRoot': argument.workingDir}, (err) => {
-                if (err) {
+                    if (err) {
                     env.adapter.log.error(err.message);
                 } else {
                     env.adapter.log.ok('completed');

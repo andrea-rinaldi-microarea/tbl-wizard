@@ -16,7 +16,8 @@ WizardAdapter.prototype.prompt = function (questions) {
 };
 
 WizardAdapter.prototype.diff = function (actual, expected) {
-
+    //@@@TODO
+    // as we are using the 'force' options, no chanches of resolving conflicts will ever occur
 };
 
 WizardAdapter.prototype.log = require('../src/wizard-logger')();
