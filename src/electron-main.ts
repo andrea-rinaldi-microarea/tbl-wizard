@@ -7,24 +7,33 @@ var WizardAdapter = require('../src/wizard-adapter');
 
 var templatesPath: string;
 var mainWindow: Electron.BrowserWindow;
+var env: any;
 
 function setEventHandlers() {
     ipcMain
     .on('run', (event, argument) => {
         try {
-            var env = yeoman.createEnv([],{}, new WizardAdapter());
+            env = yeoman.createEnv([],{}, new WizardAdapter());
             env.registerStub(starboltApp, 'sb:app');
             env.adapter.setMainWindow(mainWindow);
             env.adapter.answers = argument.answers;
-            env.run('sb:app', { 'force': true, 'sourceRoot': templatesPath, 'destinationRoot': argument.workingDir}, (err) => {
-                    if (err) {
+            env.run('sb:app', { 'sourceRoot': templatesPath, 'destinationRoot': argument.workingDir}, (err) => {
+                if (err) {
                     env.adapter.log.error(err.message);
                 } else {
                     env.adapter.log.ok('completed');
                 }
             });
         } catch(err) {
-            console.log(err);
+            env.adapter.log.error(err.message);
+        }
+    })
+    .on('conflicts-prompt-answered', (event, argument) => {
+        try {
+            if (typeof env !== 'undefined') {
+                env.adapter.conflictsPromptAnswered(argument);
+            }
+        } catch(err) {
             env.adapter.log.error(err.message);
         }
     })

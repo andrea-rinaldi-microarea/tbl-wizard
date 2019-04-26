@@ -2,3 +2,7 @@
 <p>{{version}}</p>
 <button (click)="onRun()">Run</button>
 <p *ngFor="let line of log">{{line}}</p>
+<div [hidden]="!prompt">
+    <button (click)="onOverwrite();prompt=false">Confirm</button>
+    <button (click)="onAbort();prompt=false">Abort</button>
+</div>

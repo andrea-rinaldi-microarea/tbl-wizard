@@ -15,6 +15,11 @@
             "type": "npm",
             "script": "ts",
             "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "ng",
+            "problemMatcher": []
         }
     ]
 }
