@@ -17,15 +17,14 @@ function setEventHandlers() {
             env.adapter.setMainWindow(mainWindow);
             env.adapter.answers = argument.answers;
             env.run('sb:app', { 'force': true, 'sourceRoot': templatesPath, 'destinationRoot': argument.workingDir}, (err) => {
-                    if (err) {
-                    env.adapter.log.error(err.message);
+                if (err) {
+                    env.adapter.log.error(err);
                 } else {
                     env.adapter.log.ok('completed');
                 }
             });
         } catch(err) {
-            console.log(err);
-            env.adapter.log.error(err.message);
+            env.adapter.log.error(err);
         }
     })
     .on('version', (event, argument) => {

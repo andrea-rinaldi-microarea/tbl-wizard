@@ -38,6 +38,6 @@ export class AppComponent implements OnInit {
         appName: "myNewApp",
         defaultLibrary: "firstLibrary"
       }
-    });
+      });
   } 
 }
