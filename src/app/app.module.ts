@@ -4,10 +4,12 @@ import { NgxElectronModule } from 'ngx-electron';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LogComponent } from './log/log.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LogComponent
   ],
   imports: [
     BrowserModule,
