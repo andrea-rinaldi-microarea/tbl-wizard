@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { WorkspaceService } from './../service/workspace.service';
+import { Component, OnInit } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 
 @Component({
@@ -10,7 +11,7 @@ export class ApplicationComponent implements OnInit {
 
   constructor(
     private electron: ElectronService,
-    private chd: ChangeDetectorRef    
+    private workspace: WorkspaceService    
   ) { }
 
   ngOnInit() {
@@ -19,7 +20,7 @@ export class ApplicationComponent implements OnInit {
   onRun() {
     if (this.electron.isElectronApp) {
       this.electron.ipcRenderer.send('run', { 
-        workingDir: "C:\\Users\\rinaldi\\Documents\\working\\standard\\applications",
+        workingDir: this.workspace.path(),
         answers:  {
           appName: "myNewApp",
           defaultLibrary: "firstLibrary"

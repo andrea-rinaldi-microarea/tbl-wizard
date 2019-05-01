@@ -1,3 +1,4 @@
+import { WorkspaceService } from './service/workspace.service';
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 
@@ -12,8 +13,10 @@ export class AppComponent implements OnInit {
   
   constructor(
     private electron: ElectronService,
-    private chd: ChangeDetectorRef
+    private chd: ChangeDetectorRef,
+    private workspace: WorkspaceService
   ) {
+    // this.workspace.set("C:\\Users\\rinaldi\\Documents\\working\\standard\\applications");
     if (this.electron.isElectronApp) {
       this.electron.ipcRenderer
       .on('main-version', (event, arg) => {

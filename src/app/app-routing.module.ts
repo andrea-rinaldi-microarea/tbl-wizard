@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ApplicationComponent } from './application/application.component';
+import { SelectWorkspaceComponent } from './select-workspace/select-workspace.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,12 @@ const routes: Routes = [
   {
     path: 'application',
     component: ApplicationComponent
+  },
+  {
+    path: 'select-workspace',
+    component: SelectWorkspaceComponent
   }
+
 ];
 
 @NgModule({

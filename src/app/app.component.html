@@ -1,17 +1,20 @@
 <div class="container-fluid h-100 tblw-no-overflow">
-    <nav class="navbar navbar-dark bg-dark">
-      <span class="navbar-brand">
-        <img src="assets/wizard.png" width="50" height="50" class="d-inline-block" alt="">
-        <span class="ml-3">Task Builder Legacy Wizard</span> 
-      </span>
-      <span class="navbar-text h4" >
-        No workspace
-      </span>
-      <span></span>
-    </nav>
-    <div class="tblw-main-frame tblw-fullpage">
-        <p>{{version}}</p>
-        <router-outlet></router-outlet>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="navbar-brand">
+      <img src="assets/wizard.png" width="50" height="50" class="d-inline-block" alt="">
+      <span class="ml-3">Task Builder Legacy Wizard</span> 
     </div>
+    <div class="navbar-text h4" *ngIf="workspace.path()" >
+        Workspace: {{workspace.name()}}
+    </div>
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" href="#/select-workspace">{{workspace.path() ? "Change" : "Open"}}</a>
+        <a class="nav-item nav-link" href="#">About</a>
+    </div>
+  </nav>
+  <div class="tblw-main-frame tblw-fullpage">
+      <p>{{version}}</p>
+      <router-outlet></router-outlet>
+  </div>
   
 </div>
