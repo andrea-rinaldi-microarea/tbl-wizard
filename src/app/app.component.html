@@ -1,4 +1,17 @@
-<h3>tbl wizard</h3>
-<p>{{version}}</p>
-<button (click)="onRun()">Run</button>
-<app-log></app-log>
+<div class="container-fluid h-100 tblw-no-overflow">
+    <nav class="navbar navbar-dark bg-dark">
+      <span class="navbar-brand">
+        <img src="assets/wizard.png" width="50" height="50" class="d-inline-block" alt="">
+        <span class="ml-3">Task Builder Legacy Wizard</span> 
+      </span>
+      <span class="navbar-text h4" >
+        No workspace
+      </span>
+      <span></span>
+    </nav>
+    <div class="tblw-main-frame tblw-fullpage">
+        <p>{{version}}</p>
+        <router-outlet></router-outlet>
+    </div>
+  
+</div>

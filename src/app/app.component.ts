@@ -8,7 +8,6 @@ import { ElectronService } from 'ngx-electron';
 })
 export class AppComponent implements OnInit {
   title = 'ng-tbl-wizard';
-  result: string ='';
   version: string;
   
   constructor(
@@ -30,15 +29,4 @@ export class AppComponent implements OnInit {
     }
   }
 
-  onRun() {
-    if (this.electron.isElectronApp) {
-      this.electron.ipcRenderer.send('run', { 
-        workingDir: "C:\\Users\\rinaldi\\Documents\\working\\standard\\applications",
-        answers:  {
-          appName: "myNewApp",
-          defaultLibrary: "firstLibrary"
-        }
-      });
-    }
-  } 
 }
