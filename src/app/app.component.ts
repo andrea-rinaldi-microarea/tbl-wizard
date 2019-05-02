@@ -1,6 +1,7 @@
+import { GeneratorService } from './service/generator.service';
 import { WorkspaceService } from './service/workspace.service';
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
+import { Versions } from '../models/versions';
 
 @Component({
   selector: 'app-root',
@@ -12,24 +13,18 @@ export class AppComponent implements OnInit {
   version: string;
   
   constructor(
-    private electron: ElectronService,
     private chd: ChangeDetectorRef,
-    private workspace: WorkspaceService
+    private workspace: WorkspaceService,
+    private generator: GeneratorService
   ) {
     this.workspace.set("C:\\Users\\rinaldi\\Documents\\working\\standard\\applications");
-    if (this.electron.isElectronApp) {
-      this.electron.ipcRenderer
-      .on('main-version', (event, arg) => {
-        this.version = "electron: " + arg.electron + " node: " + arg.node;
-        this.chd.detectChanges();
-      })
-    }
   }
 
   ngOnInit() {
-    if (this.electron.isElectronApp) {
-      this.electron.ipcRenderer.send('version', true);
-    }
+    this.generator.getVersions().subscribe( (ver: Versions) => {
+      this.version =  "electron: " + ver.electron + " node: " + ver.node;
+      this.chd.detectChanges();
+    })
   }
 
 }

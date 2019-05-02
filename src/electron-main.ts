@@ -3,6 +3,7 @@ import * as path from "path";
 import * as url from "url";
 import * as yeoman from "yeoman-environment";
 import * as starboltApp from "generator-starbolt/generators/app";
+import { Versions } from "./models/versions";
 var WizardAdapter = require('../src/wizard-adapter');
 
 var templatesPath: string;
@@ -27,13 +28,10 @@ function setEventHandlers() {
             env.adapter.log.error(err.message ? err.message : err);
         }
     })
-    .on('version', (event, argument) => {
+    .on('getVersions', (event, argument) => {
         event.sender.send(
-            'main-version', 
-            {
-                "electron": process.versions.electron,
-                "node": process.versions.node
-            }
+            'getVersions-response', 
+            new Versions(process.versions.electron, process.versions.node)
         );
     });
 }
