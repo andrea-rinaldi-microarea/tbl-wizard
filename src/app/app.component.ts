@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     private chd: ChangeDetectorRef,
     private workspace: WorkspaceService
   ) {
-    // this.workspace.set("C:\\Users\\rinaldi\\Documents\\working\\standard\\applications");
+    this.workspace.set("C:\\Users\\rinaldi\\Documents\\working\\standard\\applications");
     if (this.electron.isElectronApp) {
       this.electron.ipcRenderer
       .on('main-version', (event, arg) => {
