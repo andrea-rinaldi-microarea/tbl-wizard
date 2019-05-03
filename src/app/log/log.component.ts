@@ -1,5 +1,6 @@
+import { GeneratorService } from './../service/generator.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
+import { LogEntry } from 'src/models/log-entry';
 
 @Component({
   selector: 'app-log',
@@ -11,16 +12,13 @@ export class LogComponent implements OnInit {
   log: string[] = [];
 
   constructor(
-    private electron: ElectronService,
-    private chd: ChangeDetectorRef
+    private chd: ChangeDetectorRef,
+    private generator: GeneratorService
   ) { 
-    if (this.electron.isElectronApp) {
-      this.electron.ipcRenderer
-      .on('log', (event, arg) => {
-        this.log.push('[' + arg.status + '] ' + arg.arguments[0]);
-        this.chd.detectChanges();
-      })
-    }
+    this.generator.log().subscribe( (log: LogEntry) => {
+      this.log.push('[' + log.status + '] ' + log.message);
+      this.chd.detectChanges();
+    });
   }
 
   ngOnInit() {

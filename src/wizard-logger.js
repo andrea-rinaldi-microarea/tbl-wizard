@@ -24,7 +24,7 @@ module.exports = function logger() {
 
     log._send = function(status, args) {
       if (this.mainWindow)
-        this.mainWindow.webContents.send('log', {status: status, pad: this._pad, arguments: args})
+        this.mainWindow.webContents.send('log', {status: status, pad: this._pad, message: args[0]})
     }
 
     log.write = function () {

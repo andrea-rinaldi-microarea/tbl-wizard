@@ -1,3 +1,4 @@
+import { LogEntry } from './../../models/log-entry';
 import { Versions } from '../../models/versions';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -28,5 +29,18 @@ export class GeneratorService {
     });
 
     return $version;
+  }
+
+  log() : Observable<LogEntry> {
+    var $log = new Observable<LogEntry> ( observer => {
+      if (this.electron.isElectronApp) {
+        this.electron.ipcRenderer
+        .on('log', (event, log: LogEntry) => {
+          observer.next(log);
+        });
+      }
+    });
+
+    return $log;
   }
 }
