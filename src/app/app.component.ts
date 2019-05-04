@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
     private modalService: NgbModal,
     private workspace: WorkspaceService
   ) {
-    this.workspace.set("C:\\Users\\rinaldi\\Documents\\working");
   }
 
   ngOnInit() {

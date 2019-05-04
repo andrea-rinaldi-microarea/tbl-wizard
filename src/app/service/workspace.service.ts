@@ -2,25 +2,28 @@ import { Injectable } from '@angular/core';
 import { Path, Fs } from '../utils/node';
 import { ElectronService } from 'ngx-electron';
 
+const WORKSPACE_KEY = "WorkspaceService.root";
+
 @Injectable({
   providedIn: 'root'
 })
 export class WorkspaceService {
   
   private _root: string = "";
-  private _name: string = "";
 
   constructor(
     private electron: ElectronService
-  ) { }
+  ) {
+    this._root = localStorage.getItem(WORKSPACE_KEY);
+  }
 
   set(newRoot: string) : void {
     this._root = newRoot;
-    this._name = Path.basename(this._root);
+    localStorage.setItem(WORKSPACE_KEY, this._root);
   }
 
   path(): string {
-    return Path.join(this._root, "standard", "applications");
+    return this.isEmpty() ? "" : Path.join(this._root, "standard", "applications");
   }
 
   root(): string {
@@ -28,11 +31,11 @@ export class WorkspaceService {
   }
 
   name() : string {
-    return this._name;
+    return this.isEmpty() ? "" : Path.basename(this._root);
   }
 
   isEmpty(): boolean {
-    return this._root === "";
+    return this._root === null || this._root === "";
   }
 
   check(newRoot: string): string {
