@@ -4,6 +4,8 @@ import * as url from "url";
 import * as yeoman from "yeoman-environment";
 import * as starboltApp from "generator-starbolt/generators/app";
 import { Versions } from "./models/versions";
+import { RunArguments } from './models/run-arguments';
+import { LogEntry } from './models/log-entry';
 var WizardAdapter = require('../src/wizard-adapter');
 
 var templatesPath: string;
@@ -11,24 +13,24 @@ var mainWindow: Electron.BrowserWindow;
 
 function setEventHandlers() {
     ipcMain
-    .on('run', (event, argument) => {
+    .on('run', (event, args: RunArguments) => {
         try {
             var env = yeoman.createEnv([],{}, new WizardAdapter());
             env.registerStub(starboltApp, 'sb:app');
             env.adapter.setMainWindow(mainWindow);
-            env.adapter.answers = argument.answers;
-            env.run('sb:app', { 'force': true, 'sourceRoot': templatesPath, 'destinationRoot': argument.workingDir}, (err) => {
+            env.adapter.answers = args.answers;
+            env.run('sb:app', { 'force': true, 'sourceRoot': templatesPath, 'destinationRoot': args.workingDir}, (err) => {
                 if (err) {
-                    env.adapter.log.error(err.message ? err.message : err);
+                    event.sender.send('run-response', LogEntry.error(err.message ? err.message : err))
                 } else {
-                    env.adapter.log.ok('completed');
+                    event.sender.send('run-response', LogEntry.success('completed'));
                 }
             });
         } catch(err) {
-            env.adapter.log.error(err.message ? err.message : err);
+            event.sender.send('run-response', LogEntry.error(err.message ? err.message : err))
         }
     })
-    .on('getVersions', (event, argument) => {
+    .on('getVersions', (event) => {
         event.sender.send(
             'getVersions-response', 
             new Versions(process.versions.electron, process.versions.node)

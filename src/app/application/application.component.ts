@@ -1,7 +1,8 @@
+import { GeneratorService } from './../service/generator.service';
 import { LogService } from './../service/log.service';
 import { WorkspaceService } from './../service/workspace.service';
-import { Component, OnInit } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { RunArguments } from 'src/models/run-arguments';
 
 @Component({
   selector: 'tblw-application',
@@ -11,9 +12,10 @@ import { ElectronService } from 'ngx-electron';
 export class ApplicationComponent implements OnInit {
 
   constructor(
-    private electron: ElectronService,
     private workspace: WorkspaceService,
-    private logger: LogService    
+    private logger: LogService,
+    private generator: GeneratorService,
+    private chd: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -21,15 +23,16 @@ export class ApplicationComponent implements OnInit {
 
   onRun() {
     this.logger.info("Creating new app ...");
-    if (this.electron.isElectronApp) {
-      this.electron.ipcRenderer.send('run', { 
-        workingDir: this.workspace.path(),
-        answers:  {
-          appName: "myNewApp",
-          defaultLibrary: "firstLibrary"
-        }
-      });
-    }
+    this.generator.run(new RunArguments( 
+      this.workspace.path(),
+      {
+        appName: "myNewApp",
+        defaultLibrary: "firstLibrary"
+      }))
+    .subscribe( entry => {
+      this.logger.add(entry);
+      this.chd.detectChanges();
+    });
   } 
 
 }

@@ -1,7 +1,7 @@
 import { GeneratorService } from './service/generator.service';
 import { WorkspaceService } from './service/workspace.service';
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
-import { Versions } from '../models/versions';
+import { Versions } from 'src/models/versions';
 
 @Component({
   selector: 'app-root',

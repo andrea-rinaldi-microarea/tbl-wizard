@@ -1,4 +1,4 @@
-import { LogEntry } from './../../models/log-entry';
+import { LogEntry } from 'src/models/log-entry';
 import { Injectable } from '@angular/core';
 import { GeneratorService } from './generator.service';
 import { Observable, Subject } from 'rxjs';
@@ -21,8 +21,12 @@ export class LogService {
     });
   }
 
+  add(entry: LogEntry) {
+    this.log.push(entry);
+  }
+
   info(message: string) {
-    this.log.push(new LogEntry("info", 0, message));
+    this.log.push(LogEntry.info(message));
   }
 
   // changes arriving from the generator are not in the Angular changes detection loop
