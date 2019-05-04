@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class WorkspaceService {
   
-  private _path: string = null;
-  private _name: string = null;
+  private _path: string = "";
+  private _name: string = "";
 
   constructor() { }
 
@@ -23,5 +23,9 @@ export class WorkspaceService {
 
   name() : string {
     return this._name;
+  }
+
+  isEmpty(): boolean {
+    return this._path === "";
   }
 }

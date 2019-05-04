@@ -1,3 +1,5 @@
+import { WorkspaceService } from './../service/workspace.service';
+import { MessagesService } from './../service/messages.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,10 +11,15 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private messages: MessagesService,
+    private workspace: WorkspaceService
   ) { }
 
   ngOnInit() {
+    if (this.workspace.isEmpty()) {
+      this.messages.info("You have no workspace defined, click on the <a href='#/select-workspace'>Open</a> option to select one.");
+    }
   }
 
   onCreateApplication() {

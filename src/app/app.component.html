@@ -4,14 +4,15 @@
       <img src="assets/wizard.png" width="50" height="50" class="d-inline-block" alt="">
       <span class="ml-3">Task Builder Legacy Wizard</span> 
     </div>
-    <div class="navbar-text h4" *ngIf="workspace.path()" >
+    <div class="navbar-text h4" *ngIf="!workspace.isEmpty()" >
         Workspace: {{workspace.name()}}
     </div>
     <div class="navbar-nav">
-        <a class="nav-item nav-link" href="#/select-workspace">{{workspace.path() ? "Change" : "Open"}}</a>
+        <a class="nav-item nav-link" href="#/select-workspace">{{workspace.isEmpty() ? "Open" : "Change"}}</a>
         <a class="nav-item nav-link" href="#">About</a>
     </div>
   </nav>
+  <tblw-messages></tblw-messages>
   <div class="tblw-main-frame tblw-fullpage">
       <p>{{version}}</p>
       <router-outlet></router-outlet>

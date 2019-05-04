@@ -8,6 +8,7 @@ import { LogViewerComponent } from './log-viewer/log-viewer.component';
 import { ApplicationComponent } from './application/application.component';
 import { HomeComponent } from './home/home.component';
 import { SelectWorkspaceComponent } from './select-workspace/select-workspace.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SelectWorkspaceComponent } from './select-workspace/select-workspace.co
     LogViewerComponent,
     ApplicationComponent,
     HomeComponent,
-    SelectWorkspaceComponent
+    SelectWorkspaceComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

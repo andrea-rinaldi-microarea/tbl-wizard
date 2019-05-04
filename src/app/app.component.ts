@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     private workspace: WorkspaceService,
     private generator: GeneratorService
   ) {
-    this.workspace.set("C:\\Users\\rinaldi\\Documents\\working\\standard\\applications");
+    // this.workspace.set("C:\\Users\\rinaldi\\Documents\\working\\standard\\applications");
   }
 
   ngOnInit() {
