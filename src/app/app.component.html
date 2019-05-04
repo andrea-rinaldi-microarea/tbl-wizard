@@ -9,12 +9,11 @@
     </div>
     <div class="navbar-nav">
         <a class="nav-item nav-link" href="#/select-workspace">{{workspace.isEmpty() ? "Open" : "Change"}}</a>
-        <a class="nav-item nav-link" href="#">About</a>
+        <a class="nav-item nav-link" style="cursor:pointer" (click)="about()">About</a>
     </div>
   </nav>
   <tblw-messages></tblw-messages>
   <div class="tblw-main-frame tblw-fullpage">
-      <p>{{version}}</p>
       <router-outlet></router-outlet>
   </div>
   

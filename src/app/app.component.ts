@@ -1,7 +1,7 @@
-import { GeneratorService } from './service/generator.service';
 import { WorkspaceService } from './service/workspace.service';
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
-import { Versions } from 'src/models/versions';
+import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AboutComponent } from './about/about.component';
 
 @Component({
   selector: 'app-root',
@@ -13,18 +13,17 @@ export class AppComponent implements OnInit {
   version: string;
   
   constructor(
-    private chd: ChangeDetectorRef,
-    private workspace: WorkspaceService,
-    private generator: GeneratorService
+    private modalService: NgbModal,
+    private workspace: WorkspaceService
   ) {
     // this.workspace.set("C:\\Users\\rinaldi\\Documents\\working\\standard\\applications");
   }
 
   ngOnInit() {
-    this.generator.getVersions().subscribe( (ver: Versions) => {
-      this.version =  "electron: " + ver.electron + " node: " + ver.node;
-      this.chd.detectChanges();
-    })
+  }
+
+  about() {
+    this.modalService.open(AboutComponent);
   }
 
 }

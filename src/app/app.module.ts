@@ -9,6 +9,8 @@ import { ApplicationComponent } from './application/application.component';
 import { HomeComponent } from './home/home.component';
 import { SelectWorkspaceComponent } from './select-workspace/select-workspace.component';
 import { MessagesComponent } from './messages/messages.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +19,17 @@ import { MessagesComponent } from './messages/messages.component';
     ApplicationComponent,
     HomeComponent,
     SelectWorkspaceComponent,
-    MessagesComponent
+    MessagesComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxElectronModule
+    NgxElectronModule,
+    NgbModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AboutComponent]
 })
 export class AppModule { }
