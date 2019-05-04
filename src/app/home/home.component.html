@@ -1,2 +1,4 @@
-<h4>Home</h4>
-<button (click)="onCreateApplication()">Create Application</button>
+<div *ngIf="!workspace.isEmpty()">
+    <h4>Home</h4>
+    <button (click)="onCreateApplication()">Create Application</button>
+</div>

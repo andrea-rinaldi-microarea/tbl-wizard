@@ -9,14 +9,13 @@ import { AboutComponent } from './about/about.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Task Builder Legacy Wizard';
   version: string;
   
   constructor(
     private modalService: NgbModal,
     private workspace: WorkspaceService
   ) {
-    // this.workspace.set("C:\\Users\\rinaldi\\Documents\\working\\standard\\applications");
+    this.workspace.set("C:\\Users\\rinaldi\\Documents\\working");
   }
 
   ngOnInit() {

@@ -11,6 +11,7 @@ import { SelectWorkspaceComponent } from './select-workspace/select-workspace.co
 import { MessagesComponent } from './messages/messages.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AboutComponent } from './about/about.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AboutComponent } from './about/about.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     NgxElectronModule,
     NgbModule
   ],
