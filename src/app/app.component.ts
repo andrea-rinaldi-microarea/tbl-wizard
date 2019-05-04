@@ -9,7 +9,7 @@ import { Versions } from '../models/versions';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'ng-tbl-wizard';
+  title = 'Task Builder Legacy Wizard';
   version: string;
   
   constructor(

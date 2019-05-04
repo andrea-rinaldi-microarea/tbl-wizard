@@ -4,7 +4,7 @@ import { NgxElectronModule } from 'ngx-electron';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LogComponent } from './log/log.component';
+import { LogViewerComponent } from './log-viewer/log-viewer.component';
 import { ApplicationComponent } from './application/application.component';
 import { HomeComponent } from './home/home.component';
 import { SelectWorkspaceComponent } from './select-workspace/select-workspace.component';
@@ -12,7 +12,7 @@ import { SelectWorkspaceComponent } from './select-workspace/select-workspace.co
 @NgModule({
   declarations: [
     AppComponent,
-    LogComponent,
+    LogViewerComponent,
     ApplicationComponent,
     HomeComponent,
     SelectWorkspaceComponent

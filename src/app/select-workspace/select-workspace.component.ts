@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-select-workspace',
+  selector: 'tblw-select-workspace',
   templateUrl: './select-workspace.component.html',
   styleUrls: ['./select-workspace.component.scss']
 })
