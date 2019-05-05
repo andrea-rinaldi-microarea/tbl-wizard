@@ -12,6 +12,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AboutComponent } from './about/about.component';
 import { FormsModule } from '@angular/forms';
+import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
+import { SidebarMenuItemComponent } from './sidebar-menu/sidebar-menu-item/sidebar-menu-item.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     SelectWorkspaceComponent,
     MessagesComponent,
-    AboutComponent
+    AboutComponent,
+    SidebarMenuComponent,
+    SidebarMenuItemComponent
   ],
   imports: [
     BrowserModule,

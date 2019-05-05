@@ -25,8 +25,4 @@ export class HomeComponent implements OnInit {
       this.applications = this.workspace.applicationsList();
     }
   }
-
-  onCreateApplication() {
-    this.router.navigateByUrl('/application');
-  }
 }
