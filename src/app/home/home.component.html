@@ -5,7 +5,10 @@
         <div class="column col-sm-9">
             <div *ngIf="!workspace.isEmpty()">
                 <ul>
-                    <li *ngFor="let app of applications">{{app}}</li>
+                    <li *ngFor="let app of applications" role="button" (click)="onOpen(app)">
+                        <span class="fa fa-folder-open-o" ></span>
+                        {{app}}
+                    </li>
                 </ul>
             </div>
         </div>

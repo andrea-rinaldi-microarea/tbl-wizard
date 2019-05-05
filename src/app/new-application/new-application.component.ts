@@ -9,7 +9,7 @@ import { RunArguments } from 'src/models/run-arguments';
   templateUrl: './new-application.component.html',
   styleUrls: ['./new-application.component.scss']
 })
-export class ApplicationComponent implements OnInit {
+export class NewApplicationComponent implements OnInit {
 
   constructor(
     private workspace: WorkspaceService,

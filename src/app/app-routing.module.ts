@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ApplicationComponent } from './new-application/new-application.component';
+import { NewApplicationComponent } from './new-application/new-application.component';
 import { SelectWorkspaceComponent } from './select-workspace/select-workspace.component';
+import { EditApplicationComponent } from './edit-application/edit-application.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,11 @@ const routes: Routes = [
   },
   {
     path: 'new-application',
-    component: ApplicationComponent
+    component: NewApplicationComponent
+  },
+  {
+    path: 'edit-application/:app',
+    component: EditApplicationComponent
   },
   {
     path: 'select-workspace',

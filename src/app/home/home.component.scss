@@ -5,4 +5,11 @@ ul {
 
 li {
     margin-bottom: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+li:hover {
+    color: #0056b3;
+    text-decoration: underline;
 }
