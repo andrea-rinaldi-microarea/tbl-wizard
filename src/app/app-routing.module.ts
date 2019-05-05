@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { ApplicationComponent } from './application/application.component';
+import { ApplicationComponent } from './new-application/new-application.component';
 import { SelectWorkspaceComponent } from './select-workspace/select-workspace.component';
 
 const routes: Routes = [
@@ -15,7 +15,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'application',
+    path: 'new-application',
     component: ApplicationComponent
   },
   {
