@@ -1,7 +1,14 @@
+var electron = require("electron");
+
 
 var WizardAdapter = module.exports = function WizardAdapter() {
     var answers = {};
     var mainWindow = null;
+
+    electron.ipcMain
+    .on("prompt-answered",              this.promptAnswered.bind(this) )
+    .on('conflicts-prompt-answered',    this.conflictsPromptAnswered.bind(this) )
+    ;
 }
 
 WizardAdapter.prototype.setMainWindow = function (mainWindow) {
@@ -9,8 +16,23 @@ WizardAdapter.prototype.setMainWindow = function (mainWindow) {
     this.log.mainWindow = mainWindow;
 }
 
-WizardAdapter.prototype.conflictsPromptAnswered = function(result) {
-    this.conflictsCallback(result);
+WizardAdapter.prototype.conflictsPromptAnswered = function(event, argument) {
+    try {
+        if (this.conflictsCallback) {
+            this.conflictsCallback(argument);
+        }
+    } catch(err) {
+        this.log.error(err.message);
+    }
+}
+WizardAdapter.prototype.promptAnswered = function(event, argument) {
+    try {
+        if (this.fulfillCallback) {
+            this.fulfillCallback(argument.answers);
+        }
+    } catch(err) {
+        this.log.error(err.message);
+    }
 }
 
 // Note: this is based on the fact that in the used version of the Yeoman Generator (3.2.0) "regular" prompts
@@ -20,7 +42,9 @@ WizardAdapter.prototype.conflictsPromptAnswered = function(result) {
 WizardAdapter.prototype.prompt = function (questions, conflictsCallback) {
     if (typeof conflictsCallback === 'undefined') {
         return new Promise(function (fulfill, reject) {
-            fulfill(this.answers);
+            this.mainWindow.webContents.send('prompt', {questions: questions})
+            this.fulfillCallback = fulfill;
+            // fulfill(this.answers);
         }.bind(this));
     } else {
         if (this.mainWindow) {

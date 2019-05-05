@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   log: string[] = [];
   version: string;
   prompt: boolean = false;
+  questions: boolean = false;
   
   constructor(
     private electron: ElectronService,
@@ -29,6 +30,13 @@ export class AppComponent implements OnInit {
     .on('conflicts-prompt', (event, arg) => {
       this.log.push(arg.questions[0].message);
       this.prompt = true;
+      this.chd.detectChanges();
+    })
+    .on('prompt', (event, arg) => {
+      arg.questions.forEach(q => {
+        this.log.push(q.message);
+      }); 
+      this.questions = true;
       this.chd.detectChanges();
     })
   }
@@ -55,6 +63,14 @@ export class AppComponent implements OnInit {
   onAbort() {
     this.electron.ipcRenderer.send('conflicts-prompt-answered', { 
       action: 'abort' 
+    });
+  } 
+  onAnswers() {
+    this.electron.ipcRenderer.send('prompt-answered', { 
+      answers:  {
+        appName: "myNewApp",
+        defaultLibrary: "firstLibrary"
+      } 
     });
   } 
 }

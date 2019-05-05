@@ -28,15 +28,6 @@ function setEventHandlers() {
             env.adapter.log.error(err.message);
         }
     })
-    .on('conflicts-prompt-answered', (event, argument) => {
-        try {
-            if (typeof env !== 'undefined') {
-                env.adapter.conflictsPromptAnswered(argument);
-            }
-        } catch(err) {
-            env.adapter.log.error(err.message);
-        }
-    })
     .on('version', (event, argument) => {
         event.sender.send(
             'main-version', 
