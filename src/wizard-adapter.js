@@ -2,7 +2,6 @@ var electron = require("electron");
 
 
 var WizardAdapter = module.exports = function WizardAdapter() {
-    var answers = {};
     var mainWindow = null;
 
     electron.ipcMain
@@ -11,25 +10,35 @@ var WizardAdapter = module.exports = function WizardAdapter() {
     ;
 }
 
+WizardAdapter.prototype.dispose = function () {
+    electron.ipcMain
+    .removeAllListeners("prompt-answered")
+    .removeAllListeners('conflicts-prompt-answered')
+    ;
+}
+
 WizardAdapter.prototype.setMainWindow = function (mainWindow) {
     this.mainWindow = mainWindow;
     this.log.mainWindow = mainWindow;
 }
 
-WizardAdapter.prototype.conflictsPromptAnswered = function(event, argument) {
+WizardAdapter.prototype.conflictsPromptAnswered = function(event, answers) {
     try {
         if (this.conflictsCallback) {
-            this.conflictsCallback(argument);
+            this.conflictsCallback(answers);
         }
     } catch(err) {
         this.log.error(err.message);
+        // aborting the conflicts resolving would not invoke the 'run' callback, 
+        // so cleanup of the listeners must be done here
+        this.dispose();
     }
 }
-WizardAdapter.prototype.promptAnswered = function(event, argument) {
+WizardAdapter.prototype.promptAnswered = function(event, answers) {
     try {
-        if (argument.answers) {
+        if (!answers.cancel) {
             if (this.fulfillCallback) {
-                this.fulfillCallback(argument.answers);
+                this.fulfillCallback(answers);
             }
         } else {
             if (this.rejectCallback) {
@@ -51,7 +60,6 @@ WizardAdapter.prototype.prompt = function (questions, conflictsCallback) {
             this.mainWindow.webContents.send('prompt', {questions: questions})
             this.fulfillCallback = fulfill;
             this.rejectCallback = reject;
-            // fulfill(this.answers);
         }.bind(this));
     } else {
         if (this.mainWindow) {

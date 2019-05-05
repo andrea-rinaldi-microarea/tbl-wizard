@@ -47,12 +47,8 @@ export class AppComponent implements OnInit {
 
   onRun() {
     this.electron.ipcRenderer.send('run', { 
-      workingDir: "C:\\Users\\andrea\\Documents\\working\\standard\\applications",
+      workingDir: "C:\\Users\\andrea\\Documents\\working\\standard\\applications"
       // workingDir: "C:\\Users\\rinaldi\\Documents\\working\\standard\\applications",
-      answers:  {
-        appName: "myNewApp",
-        defaultLibrary: "firstLibrary"
-      }
     });
   } 
 
@@ -68,15 +64,13 @@ export class AppComponent implements OnInit {
   } 
   onAnswers() {
     this.electron.ipcRenderer.send('prompt-answered', { 
-      answers:  {
         appName: "myNewApp",
         defaultLibrary: "firstLibrary"
-      } 
     });
   } 
   onCancel() {
     this.electron.ipcRenderer.send('prompt-answered', { 
-      action: 'cancel' 
+      cancel: true 
     });
   } 
 }

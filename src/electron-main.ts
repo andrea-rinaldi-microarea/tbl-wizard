@@ -7,25 +7,25 @@ var WizardAdapter = require('../src/wizard-adapter');
 
 var templatesPath: string;
 var mainWindow: Electron.BrowserWindow;
-var env: any;
 
 function setEventHandlers() {
     ipcMain
     .on('run', (event, argument) => {
         try {
-            env = yeoman.createEnv([],{}, new WizardAdapter());
+            var env = yeoman.createEnv([],{}, new WizardAdapter());
             env.registerStub(starboltApp, 'sb:app');
             env.adapter.setMainWindow(mainWindow);
-            env.adapter.answers = argument.answers;
             env.run('sb:app', { 'sourceRoot': templatesPath, 'destinationRoot': argument.workingDir}, (err) => {
                 if (err) {
                     env.adapter.log.error(err.message ? err.message : err);
                 } else {
                     env.adapter.log.ok('completed');
                 }
+                env.adapter.dispose();
             });
         } catch(err) {
             env.adapter.log.error(err.message ? err.message : err);
+            env.adapter.dispose();
         }
     })
     .on('version', (event, argument) => {
