@@ -27,8 +27,14 @@ WizardAdapter.prototype.conflictsPromptAnswered = function(event, argument) {
 }
 WizardAdapter.prototype.promptAnswered = function(event, argument) {
     try {
-        if (this.fulfillCallback) {
-            this.fulfillCallback(argument.answers);
+        if (argument.answers) {
+            if (this.fulfillCallback) {
+                this.fulfillCallback(argument.answers);
+            }
+        } else {
+            if (this.rejectCallback) {
+                this.rejectCallback('Operation cancelled by the user');
+            }
         }
     } catch(err) {
         this.log.error(err.message);
@@ -44,6 +50,7 @@ WizardAdapter.prototype.prompt = function (questions, conflictsCallback) {
         return new Promise(function (fulfill, reject) {
             this.mainWindow.webContents.send('prompt', {questions: questions})
             this.fulfillCallback = fulfill;
+            this.rejectCallback = reject;
             // fulfill(this.answers);
         }.bind(this));
     } else {

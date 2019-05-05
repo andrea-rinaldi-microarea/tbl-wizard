@@ -19,13 +19,13 @@ function setEventHandlers() {
             env.adapter.answers = argument.answers;
             env.run('sb:app', { 'sourceRoot': templatesPath, 'destinationRoot': argument.workingDir}, (err) => {
                 if (err) {
-                    env.adapter.log.error(err.message);
+                    env.adapter.log.error(err.message ? err.message : err);
                 } else {
                     env.adapter.log.ok('completed');
                 }
             });
         } catch(err) {
-            env.adapter.log.error(err.message);
+            env.adapter.log.error(err.message ? err.message : err);
         }
     })
     .on('version', (event, argument) => {
