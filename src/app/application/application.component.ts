@@ -1,6 +1,6 @@
-import { GeneratorService } from './../service/generator.service';
-import { LogService } from './../service/log.service';
-import { WorkspaceService } from './../service/workspace.service';
+import { GeneratorService } from './../services/generator.service';
+import { LogService } from './../services/log.service';
+import { WorkspaceService } from './../services/workspace.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { RunArguments } from 'src/models/run-arguments';
 

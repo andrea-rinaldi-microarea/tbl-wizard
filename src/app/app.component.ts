@@ -1,4 +1,4 @@
-import { WorkspaceService } from './service/workspace.service';
+import { WorkspaceService } from './services/workspace.service';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AboutComponent } from './about/about.component';

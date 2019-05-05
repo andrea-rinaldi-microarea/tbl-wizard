@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageType, MessagesService } from '../service/messages.service';
+import { MessageType, MessagesService } from '../services/messages.service';
 
 @Component({
   selector: 'tblw-messages',

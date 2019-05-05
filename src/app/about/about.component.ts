@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { GeneratorService } from '../service/generator.service';
+import { GeneratorService } from '..s/generator.service';
 import { Versions } from 'src/models/versions';
 
 @Component({

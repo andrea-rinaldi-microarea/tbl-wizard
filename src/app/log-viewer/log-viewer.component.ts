@@ -1,4 +1,4 @@
-import { LogService } from './../service/log.service';
+import { LogService } from './../services/log.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({

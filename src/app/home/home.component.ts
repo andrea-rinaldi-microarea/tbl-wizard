@@ -1,5 +1,5 @@
-import { WorkspaceService } from './../service/workspace.service';
-import { MessagesService } from './../service/messages.service';
+import { WorkspaceService } from './../services/workspace.service';
+import { MessagesService } from './../services/messages.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 

@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
-import { MessagesService } from './../service/messages.service';
-import { WorkspaceService } from './../service/workspace.service';
+import { MessagesService } from './../services/messages.service';
+import { WorkspaceService } from './../services/workspace.service';
 import { Component, OnInit } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 
