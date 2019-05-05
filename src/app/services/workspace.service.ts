@@ -56,4 +56,20 @@ export class WorkspaceService {
     
     return null;
   }
+
+  applicationsList(): string[] {
+    if (this.isEmpty()) {
+      return [];
+    }
+
+    if (this.electron.isElectronApp) {
+      var dirs = Fs.readdirSync(this.path()).filter(
+        f =>  Fs.isDirectorySync(Path.join(this.path(), f)) &&
+              Fs.existsSync(Path.join(this.path(), f, 'Application.config'))
+      );
+      return dirs;
+    } else {
+      return ["Comics", "ERP", "MyApp", "Sandbox"];
+    }
+  }
 }

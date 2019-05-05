@@ -1,5 +1,16 @@
-<div *ngIf="!workspace.isEmpty()">
-    <h4 class="pt-2">Applications</h4>
-    <button (click)="onCreateApplication()">Create Application</button>
-    <hr>
+<div class="tblw-page">
+        <h4 class="pt-2">Applications</h4>
+        <hr>
+    <div class="row">
+        <div class="column col-sm-9">
+            <div *ngIf="!workspace.isEmpty()">
+                <ul>
+                    <li *ngFor="let app of applications">{{app}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="column col-sm-3" id="sidebar">
+            <button (click)="onCreateApplication()">Create Application</button>
+        </div>
+    </div>
 </div>

@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  public applications: string[];
+
   constructor(
     private router: Router,
     private messages: MessagesService,
@@ -19,6 +21,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     if (this.workspace.isEmpty()) {
       this.messages.info("You have no workspace defined, click on the <a href='#/select-workspace'>Open</a> option to select one.");
+    } else {
+      this.applications = this.workspace.applicationsList();
     }
   }
 

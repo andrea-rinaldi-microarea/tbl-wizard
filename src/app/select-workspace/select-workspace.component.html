@@ -1,21 +1,23 @@
-<div class="row pt-2">
-  <div class="col-lg-8 col-sm-12">
-    <form>
-      <div class="form-group row">
-        <label for="workspaceFolder" class="col-lg-3 col-sm-4 col-form-label">workspace folder</label>
-        <div class="col-lg-9 col-sm-8">
-          <div class="input-group">
-            <input type="text" class="form-control" id="workspaceFolder"  name="workspaceFolder" [(ngModel)]="workspaceFolder">
-            <div class="input-group-append">
-                <span class="input-group-text"><span class="fa fa-ellipsis-h" role="button" (click)="onBrowseWorkspace()"></span></span>
-              </div>
+<div class="tblw-page">
+  <div class="row pt-2">
+    <div class="col-lg-8 col-sm-12">
+      <form>
+        <div class="form-group row">
+          <label for="workspaceFolder" class="col-lg-3 col-sm-4 col-form-label">workspace folder</label>
+          <div class="col-lg-9 col-sm-8">
+            <div class="input-group">
+              <input type="text" class="form-control" id="workspaceFolder"  name="workspaceFolder" [(ngModel)]="workspaceFolder">
+              <div class="input-group-append">
+                  <span class="input-group-text"><span class="fa fa-ellipsis-h" role="button" (click)="onBrowseWorkspace()"></span></span>
+                </div>
+            </div>
           </div>
         </div>
-      </div>
-    </form> 
+      </form> 
+    </div>
   </div>
-</div>
-<div class="row">
-    <button class="btn btn-primary ml-2" (click)="onConfirm()">Confirm</button>
-    <button class="btn btn-secondary ml-2" (click)="onCancel()">Cancel</button>
+  <div class="row">
+      <button class="btn btn-primary ml-2" (click)="onConfirm()">Confirm</button>
+      <button class="btn btn-secondary ml-2" (click)="onCancel()">Cancel</button>
+  </div>
 </div>

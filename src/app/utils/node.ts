@@ -34,5 +34,8 @@ export class Fs {
     static existsSync(path: string): boolean {
         return __node_fs.existsSync(path);
     }
+    static isDirectorySync(path: string): boolean {
+        return __node_fs.statSync(path).isDirectory();
+    }
 }
   
